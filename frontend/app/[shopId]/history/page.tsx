@@ -3,9 +3,9 @@
 import React, { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Loader2, AlertCircle, Calendar, Trash2 } from 'lucide-react';
-import { db } from '@/lib/firebase';
+// import { db } from '@/lib/firebase';
 import { collection, getDocs, doc, deleteDoc, setDoc, getDoc } from 'firebase/firestore';
-import { HistoryItem } from '../../components/organisms/HistoryItem';
+import { HistoryItem } from '../../../components/organisms/HistoryItem';
 
 function HistoryContent() {
   const router = useRouter();
@@ -13,7 +13,7 @@ function HistoryContent() {
   const shop = params?.shopId as string;
   const [groupedHistory, setGroupedHistory] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(true);
-  
+
   // 🔥 ポップアップの状態管理
   const [modal, setModal] = useState<{
     show: boolean;
@@ -25,7 +25,7 @@ function HistoryContent() {
     show: false,
     title: '',
     message: '',
-    onConfirm: () => {},
+    onConfirm: () => { },
     type: 'edit'
   });
 
@@ -70,7 +70,7 @@ function HistoryContent() {
 
   const handleEditDate = (oldDate: string, newDate: string, itemData: any) => {
     if (!newDate || newDate === oldDate) return;
-    
+
     // 🔥 ここでポップアップの内容をカスタマイズ！
     setModal({
       show: true,
@@ -109,13 +109,13 @@ function HistoryContent() {
             <h3 className="text-xl font-black text-slate-900 mb-2">{modal.title}</h3>
             <p className="text-sm font-bold text-slate-500 leading-relaxed mb-8">{modal.message}</p>
             <div className="grid grid-cols-2 gap-3">
-              <button 
+              <button
                 onClick={() => setModal(prev => ({ ...prev, show: false }))}
                 className="py-4 rounded-2xl bg-slate-100 text-slate-500 font-black active:scale-95 transition-all"
               >
                 キャンセル
               </button>
-              <button 
+              <button
                 onClick={modal.onConfirm}
                 className={`py-4 rounded-2xl text-white font-black active:scale-95 transition-all shadow-lg ${modal.type === 'delete' ? 'bg-red-500 shadow-red-200' : 'bg-blue-600 shadow-blue-200'}`}
               >
@@ -149,12 +149,12 @@ function HistoryContent() {
               </div>
               <div className="grid gap-3">
                 {data.items.map((item: any) => (
-                  <HistoryItem 
-                    key={`${item.id}_${item.updatedAt}`} 
-                    item={item} 
-                    onEditDate={handleEditDate} 
-                    onDelete={handleDelete} 
-                    onGoToDetail={() => router.push(`/${shop}?date=${item.id}`)} 
+                  <HistoryItem
+                    key={`${item.id}_${item.updatedAt}`}
+                    item={item}
+                    onEditDate={handleEditDate}
+                    onDelete={handleDelete}
+                    onGoToDetail={() => router.push(`/${shop}?date=${item.id}`)}
                   />
                 ))}
               </div>
