@@ -1,4 +1,5 @@
 services:
+  # --- データベース (PostgreSQL) ---
   db:
     image: postgres:15
     environment:
@@ -6,10 +7,11 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: kintai_db
     ports:
-      - "5433:5432"
+      - "5434:5432"
     volumes:
       - ./db_data:/var/lib/postgresql/data
 
+  # --- バックエンド (FastAPI) ---
   backend:
     build: ./backend
     ports:
@@ -20,3 +22,16 @@ services:
       DATABASE_URL: postgresql://user:password@db:5432/kintai_db
     depends_on:
       - db
+
+  # --- フロントエンド (Next.js) ---
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
