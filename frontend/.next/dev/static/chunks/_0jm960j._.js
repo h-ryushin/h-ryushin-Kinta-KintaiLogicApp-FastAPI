@@ -334,6 +334,9 @@ const useAttendance = ()=>{
         }["useAttendance.useState"],
         type: 'info'
     });
+    // 3.5秒の無音判定用タイマー
+    const silenceTimerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // --- 1. 時間計算ロジック ---
     const calculateHours = (s)=>{
         if (!s.startTime || !s.endTime) return 0;
         const toMin = (t)=>{
@@ -345,23 +348,20 @@ const useAttendance = ()=>{
         const diff = end - start - (Number(s.breakMinutes) || 0);
         return diff > 0 ? Math.round(diff / 60 * 100) / 100 : 0;
     };
-    const fetchDailyData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
-        "useAttendance.useCallback[fetchDailyData]": async ()=>{
+    const dailyTotal = staffList.reduce((sum, staff)=>sum + calculateHours(staff), 0);
+    // --- 2. 【取得】 ---
+    const loadSavedData = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "useAttendance.useCallback[loadSavedData]": async ()=>{
             if (!shop || !date) return;
             try {
-                const res = await fetch(`http://localhost:8000/kintai/?shop=${shop}&date=${date}`);
-                const data = await res.json();
-                if (Array.isArray(data) && data.length > 0 && data[0].content) {
-                    try {
-                        setStaffList(JSON.parse(data[0].content));
-                    } catch (e) {
-                        setStaffList([]);
-                    }
+                const response = await fetch(`http://localhost:8000/kintai/?shop=${shop}&date=${date}`);
+                const data = await response.json();
+                if (data && data.length > 0 && data[0].content) {
+                    setStaffList(JSON.parse(data[0].content));
                 } else {
-                    // 初期状態
                     setStaffList([
                         {
-                            id: Date.now().toString(),
+                            id: '1',
                             name: '',
                             startTime: '17:30',
                             endTime: '22:00',
@@ -369,49 +369,125 @@ const useAttendance = ()=>{
                         }
                     ]);
                 }
-            } catch (e) {
-                console.error(e);
+            } catch (error) {
+                console.error(error);
             }
         }
-    }["useAttendance.useCallback[fetchDailyData]"], [
-        shop,
-        date
+    }["useAttendance.useCallback[loadSavedData]"], [
+        date,
+        shop
     ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "useAttendance.useEffect": ()=>{
-            fetchDailyData();
+            loadSavedData();
         }
     }["useAttendance.useEffect"], [
-        fetchDailyData
+        loadSavedData
     ]);
+    // --- 3. 【音声入力：高精度版】 ---
+    const startListening = (staffId, onStart, onEnd)=>{
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) return;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ja-JP';
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        // 💡 3.5秒無音が続いたら自動停止
+        const resetTimer = ()=>{
+            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+            silenceTimerRef.current = setTimeout(()=>{
+                recognition.stop();
+            }, 3000);
+        };
+        recognition.onstart = ()=>{
+            onStart();
+            resetTimer();
+        };
+        recognition.onresult = (event)=>{
+            resetTimer(); // 喋っている間はタイマーをリセット
+            const lastIndex = event.results.length - 1;
+            const result = event.results[lastIndex];
+            if (result.isFinal) {
+                let text = result[0].transcript.replace(/[０-９]/g, (s)=>String.fromCharCode(s.charCodeAt(0) - 0xFEE0)) // 全角数字を半角
+                .replace(/半/g, "30分").replace(/正午/g, "12時");
+                const extractTime = (sentence, keywords)=>{
+                    for (const word of keywords){
+                        if (sentence.includes(word)) {
+                            // キーワードの直前のテキストを解析
+                            const part = sentence.split(word)[0];
+                            const timeMatch = part.match(/(\d{1,2})時(?:(\d{1,2})分)?$/) || part.match(/(\d{1,2})[:：](\d{1,2})$/);
+                            if (timeMatch) {
+                                let h = parseInt(timeMatch[1]);
+                                let m = timeMatch[2] ? timeMatch[2].padStart(2, '0') : "00";
+                                // 💡 精度向上：1-8時と言われたら午後(13-20時)と判断する補助ロジック
+                                if (h >= 1 && h <= 8) h += 12;
+                                return `${String(h).padStart(2, '0')}:${m}`;
+                            }
+                        }
+                    }
+                    return null;
+                };
+                const start = extractTime(text, [
+                    "入り",
+                    "から",
+                    "スタート",
+                    "開始"
+                ]);
+                const end = extractTime(text, [
+                    "上がり",
+                    "まで",
+                    "終了",
+                    "終わり",
+                    "出し"
+                ]);
+                if (start || end) {
+                    setStaffList((prev)=>prev.map((s)=>s.id === staffId ? {
+                                ...s,
+                                startTime: start || s.startTime,
+                                endTime: end || s.endTime
+                            } : s));
+                }
+            }
+        };
+        recognition.onend = ()=>{
+            onEnd();
+            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        };
+        recognition.start();
+    };
+    // --- 4. 【保存】 ---
+    const executeSave = async ()=>{
+        try {
+            const payload = {
+                shop,
+                date,
+                totalHours: dailyTotal,
+                content: JSON.stringify(staffList)
+            };
+            await fetch("http://localhost:8000/kintai/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            setModal((prev)=>({
+                    ...prev,
+                    show: false
+                }));
+            setShowToast(true);
+            setTimeout(()=>setShowToast(false), 2000);
+        } catch (e) {
+            alert("保存に失敗しました");
+        }
+    };
     const handleSaveClick = ()=>{
-        const dailyTotal = staffList.reduce((sum, s)=>sum + calculateHours(s), 0);
         setModal({
             show: true,
-            title: "保存しますか？",
-            message: `${date} の全データを上書き保存します。`,
-            type: 'info',
-            onConfirm: async ()=>{
-                const payload = {
-                    shop,
-                    date,
-                    totalHours: dailyTotal,
-                    content: JSON.stringify(staffList)
-                };
-                await fetch("http://localhost:8000/kintai/", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload)
-                });
-                setModal((prev)=>({
-                        ...prev,
-                        show: false
-                    }));
-                setShowToast(true);
-                setTimeout(()=>setShowToast(false), 2000);
-            }
+            title: "データを保存しますか？",
+            message: `${date} のデータを上書き保存します。`,
+            type: 'success',
+            onConfirm: executeSave
         });
     };
     const handleDateChange = (newDate)=>{
@@ -423,31 +499,31 @@ const useAttendance = ()=>{
         date,
         handleDateChange,
         staffList,
+        dailyTotal,
         modal,
         setModal,
         handleSaveClick,
         showToast,
-        dailyTotal: staffList.reduce((sum, s)=>sum + calculateHours(s), 0),
-        addStaff: ()=>setStaffList([
-                ...staffList,
-                {
-                    id: Date.now().toString(),
-                    name: '',
-                    startTime: '17:30',
-                    endTime: '22:00',
-                    breakMinutes: 0
-                }
-            ]),
-        updateStaff: (id, f, v)=>setStaffList(staffList.map((s)=>s.id === id ? {
-                    ...s,
-                    [f]: v
-                } : s)),
-        deleteStaff: (id)=>setStaffList(staffList.filter((s)=>s.id !== id)),
-        calculateHours,
-        startListening: ()=>{}
+        addStaff: ()=>setStaffList((prev)=>[
+                    ...prev,
+                    {
+                        id: Date.now().toString(),
+                        name: '',
+                        startTime: '17:30',
+                        endTime: '22:00',
+                        breakMinutes: 0
+                    }
+                ]),
+        updateStaff: (id, f, v)=>setStaffList((prev)=>prev.map((s)=>s.id === id ? {
+                        ...s,
+                        [f]: v
+                    } : s)),
+        deleteStaff: (id)=>setStaffList((prev)=>prev.filter((s)=>s.id !== id)),
+        startListening,
+        calculateHours
     };
 };
-_s(useAttendance, "yH7llClS8vYcAmoSS64jPsDbkq8=", false, function() {
+_s(useAttendance, "P6C/BL+dNYVDiQxdg19lMVdzVZ4=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],
