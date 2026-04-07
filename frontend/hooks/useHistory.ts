@@ -50,5 +50,5 @@ export const useHistory = () => {
     }
   };
 
-  return { shop, groupedHistory, loading, deleteHistory };
+  return { shop, groupedHistory, loading, deleteHistory ,fetchHistory};
 };

@@ -53,10 +53,10 @@ const HistoryItem = ({ item, onEditDate, onDelete, onGoToDetail })=>/*#__PURE__*
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "date",
                                 className: "absolute inset-0 opacity-0 cursor-pointer",
-                                onChange: (e)=>onEditDate(item.id, e.target.value, item)
+                                onChange: (e)=>onEditDate(item.date, e.target.value, item)
                             }, void 0, false, {
                                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                                lineNumber: 10,
+                                lineNumber: 11,
                                 columnNumber: 9
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
@@ -69,26 +69,26 @@ const HistoryItem = ({ item, onEditDate, onDelete, onGoToDetail })=>/*#__PURE__*
                         className: "relative",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                className: "font-black text-slate-700 text-[15px]",
-                                children: item.id
+                                className: "font-black text-slate-700 text-[17px]",
+                                children: item.date
                             }, void 0, false, {
                                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                                lineNumber: 17,
+                                lineNumber: 18,
                                 columnNumber: 9
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                 type: "date",
                                 className: "absolute inset-0 opacity-0 cursor-pointer w-full",
-                                onChange: (e)=>onEditDate(item.id, e.target.value, item)
+                                onChange: (e)=>onEditDate(item.date, e.target.value, item)
                             }, void 0, false, {
                                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                                lineNumber: 18,
+                                lineNumber: 19,
                                 columnNumber: 9
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/organisms/HistoryItem.tsx",
-                        lineNumber: 16,
+                        lineNumber: 17,
                         columnNumber: 7
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
@@ -108,7 +108,7 @@ const HistoryItem = ({ item, onEditDate, onDelete, onGoToDetail })=>/*#__PURE__*
                                 children: Number(item.totalHours || 0).toFixed(2)
                             }, void 0, false, {
                                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                                lineNumber: 27,
+                                lineNumber: 28,
                                 columnNumber: 9
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -116,28 +116,28 @@ const HistoryItem = ({ item, onEditDate, onDelete, onGoToDetail })=>/*#__PURE__*
                                 children: "hrs"
                             }, void 0, false, {
                                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                                lineNumber: 28,
+                                lineNumber: 31,
                                 columnNumber: 9
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/organisms/HistoryItem.tsx",
-                        lineNumber: 26,
+                        lineNumber: 27,
                         columnNumber: 7
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$atoms$2f$IconButton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["IconButton"], {
-                        onClick: ()=>onDelete(item.id),
+                        onClick: ()=>onDelete(item),
                         className: "text-slate-200 hover:text-red-500",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$trash$2d$2$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Trash2$3e$__["Trash2"], {
                             size: 18
                         }, void 0, false, {
                             fileName: "[project]/components/organisms/HistoryItem.tsx",
-                            lineNumber: 30,
-                            columnNumber: 99
+                            lineNumber: 34,
+                            columnNumber: 9
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/organisms/HistoryItem.tsx",
-                        lineNumber: 30,
+                        lineNumber: 33,
                         columnNumber: 7
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$atoms$2f$IconButton$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["IconButton"], {
@@ -147,18 +147,18 @@ const HistoryItem = ({ item, onEditDate, onDelete, onGoToDetail })=>/*#__PURE__*
                             size: 22
                         }, void 0, false, {
                             fileName: "[project]/components/organisms/HistoryItem.tsx",
-                            lineNumber: 31,
-                            columnNumber: 89
+                            lineNumber: 37,
+                            columnNumber: 9
                         }, ("TURBOPACK compile-time value", void 0))
                     }, void 0, false, {
                         fileName: "[project]/components/organisms/HistoryItem.tsx",
-                        lineNumber: 31,
+                        lineNumber: 36,
                         columnNumber: 7
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/organisms/HistoryItem.tsx",
-                lineNumber: 25,
+                lineNumber: 26,
                 columnNumber: 5
             }, ("TURBOPACK compile-time value", void 0))
         ]
@@ -333,7 +333,8 @@ const useHistory = ()=>{
         shop,
         groupedHistory,
         loading,
-        deleteHistory
+        deleteHistory,
+        fetchHistory
     };
 };
 }),
@@ -362,7 +363,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useHistory$2e$ts__$
 ;
 function HistoryContent() {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
-    const { shop, groupedHistory, loading, deleteHistory } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useHistory$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useHistory"])();
+    const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useParams"])();
+    const shop = params?.shopId;
+    const { groupedHistory, loading, deleteHistory, fetchHistory } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$hooks$2f$useHistory$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useHistory"])();
     const [modal, setModal] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])({
         show: false,
         title: '',
@@ -370,11 +373,41 @@ function HistoryContent() {
         onConfirm: ()=>{},
         type: 'info'
     });
+    const handleEditDate = async (oldDate, newDate, itemData)=>{
+        if (!newDate || newDate === oldDate) return;
+        setModal({
+            show: true,
+            title: "日付を変更しますか？",
+            message: `${oldDate} のデータを ${newDate} に移動します。`,
+            type: 'info',
+            onConfirm: async ()=>{
+                setModal((prev)=>({
+                        ...prev,
+                        show: false
+                    }));
+                // 新しい日付で保存
+                await fetch("http://localhost:8000/kintai/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        ...itemData,
+                        id: null,
+                        date: newDate
+                    })
+                });
+                // 古い日付を削除
+                await deleteHistory(itemData.id);
+                fetchHistory(); // 再読み込み
+            }
+        });
+    };
     const handleDeleteClick = (item)=>{
         setModal({
             show: true,
             title: "データを削除しますか？",
-            message: `${item.date} の ${item.name} さんの記録を削除します。`,
+            message: `${item.date} の記録を完全に削除します。`,
             type: 'warning',
             onConfirm: async ()=>{
                 await deleteHistory(item.id);
@@ -386,7 +419,7 @@ function HistoryContent() {
         });
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "min-h-screen bg-slate-50 p-4 sm:p-8 font-sans text-slate-900",
+        className: "min-h-screen bg-slate-50 p-4 sm:p-8 font-sans text-slate-900 overflow-x-hidden relative",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$molecules$2f$SaveModal$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SaveModal"], {
                 config: modal,
@@ -396,7 +429,7 @@ function HistoryContent() {
                         }))
             }, void 0, false, {
                 fileName: "[project]/app/[shopId]/history/page.tsx",
-                lineNumber: 32,
+                lineNumber: 56,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -413,12 +446,12 @@ function HistoryContent() {
                                     className: "text-slate-400"
                                 }, void 0, false, {
                                     fileName: "[project]/app/[shopId]/history/page.tsx",
-                                    lineNumber: 37,
+                                    lineNumber: 60,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/[shopId]/history/page.tsx",
-                                lineNumber: 36,
+                                lineNumber: 59,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -429,7 +462,7 @@ function HistoryContent() {
                                         children: "履歴"
                                     }, void 0, false, {
                                         fileName: "[project]/app/[shopId]/history/page.tsx",
-                                        lineNumber: 40,
+                                        lineNumber: 63,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -437,26 +470,26 @@ function HistoryContent() {
                                         children: shop === 'kosai' ? '湖西店' : '西駅店'
                                     }, void 0, false, {
                                         fileName: "[project]/app/[shopId]/history/page.tsx",
-                                        lineNumber: 41,
+                                        lineNumber: 64,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/[shopId]/history/page.tsx",
-                                lineNumber: 39,
+                                lineNumber: 62,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "w-11"
                             }, void 0, false, {
                                 fileName: "[project]/app/[shopId]/history/page.tsx",
-                                lineNumber: 45,
+                                lineNumber: 68,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/[shopId]/history/page.tsx",
-                        lineNumber: 35,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this),
                     loading ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -466,12 +499,12 @@ function HistoryContent() {
                             size: 32
                         }, void 0, false, {
                             fileName: "[project]/app/[shopId]/history/page.tsx",
-                            lineNumber: 49,
+                            lineNumber: 72,
                             columnNumber: 54
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/[shopId]/history/page.tsx",
-                        lineNumber: 49,
+                        lineNumber: 72,
                         columnNumber: 11
                     }, this) : Object.entries(groupedHistory).map(([month, data])=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
                             className: "space-y-4",
@@ -484,7 +517,7 @@ function HistoryContent() {
                                             children: month
                                         }, void 0, false, {
                                             fileName: "[project]/app/[shopId]/history/page.tsx",
-                                            lineNumber: 54,
+                                            lineNumber: 77,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -495,69 +528,76 @@ function HistoryContent() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/[shopId]/history/page.tsx",
-                                            lineNumber: 55,
+                                            lineNumber: 78,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/[shopId]/history/page.tsx",
-                                    lineNumber: 53,
+                                    lineNumber: 76,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "grid gap-3",
                                     children: data.items.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$organisms$2f$HistoryItem$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["HistoryItem"], {
                                             item: item,
-                                            onEditDate: ()=>{},
-                                            onDelete: ()=>handleDeleteClick(item),
+                                            onEditDate: handleEditDate,
+                                            onDelete: handleDeleteClick,
                                             onGoToDetail: ()=>router.push(`/${shop}?date=${item.date}`)
                                         }, item.id, false, {
                                             fileName: "[project]/app/[shopId]/history/page.tsx",
-                                            lineNumber: 61,
+                                            lineNumber: 82,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/[shopId]/history/page.tsx",
-                                    lineNumber: 59,
+                                    lineNumber: 80,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, month, true, {
                             fileName: "[project]/app/[shopId]/history/page.tsx",
-                            lineNumber: 52,
+                            lineNumber: 75,
                             columnNumber: 13
                         }, this))
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/[shopId]/history/page.tsx",
-                lineNumber: 34,
+                lineNumber: 57,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/[shopId]/history/page.tsx",
-        lineNumber: 31,
+        lineNumber: 55,
         columnNumber: 5
     }, this);
 }
 function Page() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Suspense"], {
         fallback: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            children: "Loading..."
+            className: "flex justify-center py-24 text-blue-500",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$loader$2d$circle$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Loader2$3e$__["Loader2"], {
+                className: "animate-spin"
+            }, void 0, false, {
+                fileName: "[project]/app/[shopId]/history/page.tsx",
+                lineNumber: 101,
+                columnNumber: 82
+            }, this)
         }, void 0, false, {
             fileName: "[project]/app/[shopId]/history/page.tsx",
-            lineNumber: 78,
-            columnNumber: 61
+            lineNumber: 101,
+            columnNumber: 25
         }, this),
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(HistoryContent, {}, void 0, false, {
             fileName: "[project]/app/[shopId]/history/page.tsx",
-            lineNumber: 78,
-            columnNumber: 84
+            lineNumber: 102,
+            columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/[shopId]/history/page.tsx",
-        lineNumber: 78,
-        columnNumber: 41
+        lineNumber: 101,
+        columnNumber: 5
     }, this);
 }
 }),
